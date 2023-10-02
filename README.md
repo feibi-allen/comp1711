@@ -5,7 +5,7 @@ Author: Fei-bi Allen
 
 git status - shows status
 git add __ - adds 
-git commit -  commits 
+git commit -m "___" -  commits with message
 git push   - pushes to git
 
 "pwd" - print working directory
