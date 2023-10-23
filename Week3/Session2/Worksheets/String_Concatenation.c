@@ -7,8 +7,7 @@ int lenString(char * myString){
     return len;
 }
 
-int concatStrings(char * string1, char * string2){
-    char catString[20];
+char * concatStrings(char * string1, char * string2, char * catString){
     int len = lenString(string1);
     int i;
     for (i = 0; i > len ; i++){
@@ -22,9 +21,10 @@ int concatStrings(char * string1, char * string2){
 }
 
 int main(){
-    char myString1[5] = "abcde";
-    char myString2[5] = "fghij";
-    char myCatString[10] = concatStrings(myString1, myString2);
-    printf("%s\n", myCatString);
+    char myString1[5] = "abcd";
+    char myString2[5] = "fghi";
+    char catString[12];
+    concatStrings(myString1, myString2, catString);
+    printf("%s\n", catString);
     return 0;
 }

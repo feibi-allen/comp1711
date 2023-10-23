@@ -1,17 +1,16 @@
 #include <stdio.h>
-int str_len(char * string){
-    int count = 0;
-    int i = 0;
-    while (string[i] != '\0'){
-        count ++;
-        i ++;
+int lenString(char * myString){
+    int len = 0;
+    for (int i = 0 ; myString[i]!='\0'; i++){
+        len ++;
     }
-    return count;
+    return len;
 }
+
 
 int main(){
     char string[15] = "asjhfyt";
-    int len = str_len(string);
+    int len = lenString(string);
     printf("%d\n", len);
     return 0;
 }
