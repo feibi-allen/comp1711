@@ -7,7 +7,7 @@ int lenString(char * myString){
     return len;
 }
 
-char * concatStrings(char * string1, char * string2, char * catString){
+void concatStrings(char * string1, char * string2, char * catString){
     int len = lenString(string1);
     int i;
     for (i = 0; i < len ; i++){
@@ -17,7 +17,6 @@ char * concatStrings(char * string1, char * string2, char * catString){
         catString[len + i] = string2[i];
     }
     catString[len+ i] = '\0';
-    return catString;
 }
 
 int main(){
