@@ -9,7 +9,8 @@ int lenString(char * myString){
 
 
 int main(){
-    char string[15] = "asjhfyt";
+    char string[15];
+    scanf("%s", string);
     int len = lenString(string);
     printf("%d\n", len);
     return 0;
