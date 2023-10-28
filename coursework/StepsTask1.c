@@ -43,6 +43,15 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-    
+    char fitnessDataFile [] = "FitnessData_2023.csv";
+    FILE *dataFile = fopen(fitnessDataFile, "r");
+
+    int lineLength = 30, linesRead = 0;
+    char line[lineLength];
+    char date[11] , time[6], steps[10];
+
+    while (fgets(line , lineLength, dataFile) && linesRead < 3){
+        tokeniseRecord(line, ",", date, time, steps);
+    }
 
 }
