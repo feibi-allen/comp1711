@@ -60,4 +60,8 @@ int main() {
         lineNum++;
     }
     printf("Number of records in file: %d\n", lineNum);
+    for (int i = 0; i < 3; i++){
+        printf("%s/%s/%d\n", dataRecord[i].date, dataRecord[i].time, dataRecord[i].steps);
+    }
+    return 0;
 }
