@@ -46,12 +46,18 @@ int main() {
     char fitnessDataFile [] = "FitnessData_2023.csv";
     FILE *dataFile = fopen(fitnessDataFile, "r");
 
-    int lineLength = 30, linesRead = 0;
+    FITNESS_DATA dataRecord[100];
+
+    int lineLength = 30, lineNum = 0;
     char line[lineLength];
     char date[11] , time[6], steps[10];
 
-    while (fgets(line , lineLength, dataFile) && linesRead < 3){
+    while (fgets(line , lineLength, dataFile)){
         tokeniseRecord(line, ",", date, time, steps);
+        strcpy(dataRecord[lineNum].date, date);
+        strcpy(dataRecord[lineNum].time, time);
+        dataRecord[lineNum].steps = atoi(steps);
+        lineNum++;
     }
-
+    printf("Number of records in file: %d\n", lineNum);
 }
