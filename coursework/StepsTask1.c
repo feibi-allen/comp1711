@@ -67,5 +67,7 @@ int main() {
     for (int i = 0; i < 3; i++){
         printf("%s/%s/%d\n", dataRecord[i].date, dataRecord[i].time, dataRecord[i].steps);
     }
+    fclose(dataFile);
+
     return 0;
 }
