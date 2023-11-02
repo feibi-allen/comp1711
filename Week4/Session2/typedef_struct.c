@@ -6,9 +6,19 @@ typedef struct {  // giving the "struct student" a new name "student"
     unsigned mark;
 } student;
 
+void printStudents(student * students, int num_students){
+        for (int i = 0; i < num_students; i++) {
+        printf("-------------\n");
+        printf("Student name: %s\n", students[i].name);
+        printf("Student ID: %s\n", students[i].student_id);
+        printf("Final mark: %u\n", students[i].mark);
+    }
+    printf("-------------\n");
+}
+
 int main () {
     // Data generated using ChatGPT.
-    int number_of_students = 10, i;
+    int number_of_students = 10;
     student students [] = {  // now no longer need to use struct before student
         {"Alice Smith",    "64827593", 67}, // making an array of student structures
         {"Bob Johnson",    "19374650", 89},
@@ -21,12 +31,7 @@ int main () {
         {"Isaac Harris",   "61093745", 89},
         {"Jack White",     "92847501", 72},
     };
-    for (i = 0; i < number_of_students; i++) {
-        printf("-------------\n");
-        printf("Student name: %s\n", students[i].name);
-        printf("Student ID: %s\n", students[i].student_id);
-        printf("Final mark: %u\n", students[i].mark);
-    }
-    printf("-------------\n");
+    printStudents(students,number_of_students);
+    
     return 0;
 }

@@ -45,6 +45,10 @@ void tokeniseRecord(const char *input, const char *delimiter,
 int main() {
     char fitnessDataFile [] = "FitnessData_2023.csv";
     FILE *dataFile = fopen(fitnessDataFile, "r");
+    if (dataFile == NULL) {
+        perror("");
+        return 1;
+    }
 
     FITNESS_DATA dataRecord[100];
 
