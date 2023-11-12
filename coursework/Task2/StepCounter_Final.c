@@ -42,12 +42,17 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-    char option;
+    char option, fileName[30];
+    int lineNum = 0;
+    char date[11], time[6], steps[10];
+    FITNESS_DATA dataRecord[100];
+
     int runMenue = 0;
 
     while (runMenue == 0){
     
         printf(
+        "Menue Options:\n"
         "A: Specify the filename to be imported \n"
         "B: Display the total number of records in the file\n"
         "C: Find the date and time of the timeslot with the fewest steps\n"
@@ -57,24 +62,36 @@ int main() {
         "Q: Exit\n"
         );
 
-        scanf("%c", &option);
+        scanf("%s", &option);
 
         switch (option){
-            case 'A': printf("Input filename:\n");
-                    char fileName[30];
+            case 'A':
+                    printf("Input filename:\n");
                     scanf("%s", fileName);
+
                     FILE *dataFile = fopen(fileName, "r");
+
                     if (dataFile == NULL) {
                         perror("Error: Could not find or open file");
                         return 1;
                     }
+
                     else{
-                        printf("File successfully loaded.\n");
+                        lineNum = 0;
+                        int lineLength = 30;
+                        char line[lineLength];
+                        while (fgets(line , lineLength, dataFile)){
+                        tokeniseRecord(line, ",", date, time, steps);
+                        strcpy(dataRecord[lineNum].date, date);
+                        strcpy(dataRecord[lineNum].time, time);
+                        dataRecord[lineNum].steps = atoi(steps);
+                        lineNum++;
+                        }
+                        printf("File successfully loaded.\n\n");
                     }
-                    runMenue = 1;
                     break;
 
-            case 'B': printf("Total records:\n");
+            case 'B': printf("Total records:%d\n", lineNum);
                     runMenue = 1;
                     break;
         
