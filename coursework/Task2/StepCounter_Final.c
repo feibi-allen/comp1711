@@ -96,7 +96,7 @@ int main() {
         
             case 'C': 
                     {int targetLine, fewestNumSteps = 100000;
-                    for (int i = 0; i <= lineNum; i++){
+                    for (int i = 0; i < lineNum; i++){
                         if (dataRecord[i].steps < fewestNumSteps){
                             targetLine = i;
                             fewestNumSteps = dataRecord[targetLine].steps;
@@ -106,8 +106,17 @@ int main() {
                     }
                     break;
         
-            case 'D': printf("Largest steps:\n");
-                    runMenue = 1;
+            case 'D':
+                    {int targetLine, largestNumSteps = 0;
+                    for (int i = 0; i < lineNum; i++){
+                        if (dataRecord[i].steps > largestNumSteps){
+                            targetLine = i;
+                            largestNumSteps = dataRecord[targetLine].steps;
+                            printf("%d\n",largestNumSteps);
+                        }
+                    }
+                    printf("Largest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
+                    }
                     break;
 
             case 'E': printf("Mean step count:\n");
