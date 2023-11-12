@@ -42,29 +42,53 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-        char option;
+    char option;
+    int runMenue = 0;
 
-    printf(
-    "A: Specify the filename to be imported \n"
-    "B: Display the total number of records in the file\n"
-    "C: Find the date and time of the timeslot with the fewest steps\n"
-    "D: Find the data and time of the timeslot with the largest number of steps\n"
-    "E: Find the mean step count of all the records in the file\n"
-    "F: Find the longest continuous period where the step count is above 500 steps\n"
-    "Q: Exit"
-    );
-
-    scanf("%c", &option);
+    while (runMenue == 0){
     
-    switch (option){
-        case 'A': printf ("Converted to degrees Celsius: %f\n", fahr_to_celsius(fahrenheit));
-                  break;
+        printf(
+        "A: Specify the filename to be imported \n"
+        "B: Display the total number of records in the file\n"
+        "C: Find the date and time of the timeslot with the fewest steps\n"
+        "D: Find the data and time of the timeslot with the largest number of steps\n"
+        "E: Find the mean step count of all the records in the file\n"
+        "F: Find the longest continuous period where the step count is above 500 steps\n"
+        "Q: Exit\n"
+        );
 
-        case 'B': printf ("Converted to Kelvin: %f\n", fahr_to_kelvin(fahrenheit));
-                  break;
+        scanf("%c", &option);
 
-        case 'Q': break;
+        switch (option){
+            case 'A': printf("Input filename:\n");
+                    runMenue = 1;
+                    break;
 
-        default:  break;
+            case 'B': printf("Total records:\n");
+                    runMenue = 1;
+                    break;
+        
+            case 'C': printf("Fewest steps\n");
+                    runMenue = 1;
+                    break;
+        
+            case 'D': printf("Largest steps:\n");
+                    runMenue = 1;
+                    break;
+
+            case 'E': printf("Mean step count:\n");
+                    runMenue = 1;
+                    break;
+        
+            case 'F': printf("Longest period start:\nLongest period end:\n ");
+                    runMenue = 1;
+                    break;
+
+            case 'Q': runMenue = 1;
+                    break;
+
+            default: printf("Invalid choice. Try again.\n"); 
+                    break;
+        }
     }
 }
