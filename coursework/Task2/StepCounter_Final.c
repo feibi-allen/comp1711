@@ -61,6 +61,16 @@ int main() {
 
         switch (option){
             case 'A': printf("Input filename:\n");
+                    char fileName[30];
+                    scanf("%s", fileName);
+                    FILE *dataFile = fopen(fileName, "r");
+                    if (dataFile == NULL) {
+                        perror("Error: Could not find or open file");
+                        return 1;
+                    }
+                    else{
+                        printf("File successfully loaded.\n");
+                    }
                     runMenue = 1;
                     break;
 
