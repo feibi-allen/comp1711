@@ -97,14 +97,12 @@ int main() {
             case 'C': 
                     {int targetLine, fewestNumSteps = 100000;
                     for (int i = 0; i <= lineNum; i++){
-                        printf("%d, %d\n", i, dataRecord[i].steps);
-                        if (dataRecord[targetLine].steps < fewestNumSteps){
-                            printf("Changing target to: %d\n", targetLine);
+                        if (dataRecord[i].steps < fewestNumSteps){
                             targetLine = i;
                             fewestNumSteps = dataRecord[targetLine].steps;
                         }
                     }
-                    printf("Fewest steps: %d\n", dataRecord[targetLine].steps);
+                    printf("Fewest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
                     }
                     break;
         
