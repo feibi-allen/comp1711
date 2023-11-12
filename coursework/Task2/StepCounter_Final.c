@@ -87,16 +87,25 @@ int main() {
                         dataRecord[lineNum].steps = atoi(steps);
                         lineNum++;
                         }
-                        printf("File successfully loaded.\n\n");
+                        printf("File successfully loaded.\n");
                     }
                     break;
 
             case 'B': printf("Total records:%d\n", lineNum);
-                    runMenue = 1;
                     break;
         
-            case 'C': printf("Fewest steps\n");
-                    runMenue = 1;
+            case 'C': 
+                    {int targetLine, fewestNumSteps = 100000;
+                    for (int i = 0; i <= lineNum; i++){
+                        printf("%d, %d\n", i, dataRecord[i].steps);
+                        if (dataRecord[targetLine].steps < fewestNumSteps){
+                            printf("Changing target to: %d\n", targetLine);
+                            targetLine = i;
+                            fewestNumSteps = dataRecord[targetLine].steps;
+                        }
+                    }
+                    printf("Fewest steps: %d\n", dataRecord[targetLine].steps);
+                    }
                     break;
         
             case 'D': printf("Largest steps:\n");
