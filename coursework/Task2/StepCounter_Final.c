@@ -119,8 +119,17 @@ int main() {
                     }
                     break;
 
-            case 'E': printf("Mean step count:\n");
-                    runMenue = 1;
+            case 'E':
+                    {int stepSum = 0;
+                    for (int i = 0; i < lineNum; i++){
+                        stepSum += dataRecord[i].steps;
+                    }
+                    int averageSteps = stepSum/lineNum;
+                    if (stepSum%lineNum > lineNum/2){
+                        averageSteps ++;
+                    }
+                    printf("Mean step count: %d\n" , averageSteps);
+                    }
                     break;
         
             case 'F': printf("Longest period start:\nLongest period end:\n ");
