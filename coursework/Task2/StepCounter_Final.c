@@ -62,7 +62,8 @@ int main() {
         "Q: Exit\n"
         );
 
-        scanf("%s", &option);
+        option = getchar();
+        while (getchar() != '\n');
 
         switch (option){
             case 'A':
