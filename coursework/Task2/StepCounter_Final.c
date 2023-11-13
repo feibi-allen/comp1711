@@ -132,8 +132,18 @@ int main() {
                     }
                     break;
         
-            case 'F': printf("Longest period start:\nLongest period end:\n ");
-                    runMenue = 1;
+            case 'F':
+                    {int tempTargetBegin, tempTargetEnd, targetBegin, targetEnd, over500Period = 1;
+                    for (int i = 0; i < lineNum; i++){
+                        if ((dataRecord[i].steps > 500) && (over500Period == 1)){
+                            tempTargetBegin = i;
+                        }
+                        // write for end of period if step<500 and over500 == 0
+                        // when period ends updata actual target
+                        // for new iterations compare to original by calculating difference between start and end
+                    } 
+                    printf("Longest period start:\nLongest period end:\n ");
+                    }
                     break;
 
             case 'Q': runMenue = 1;
