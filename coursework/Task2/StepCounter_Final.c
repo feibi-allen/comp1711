@@ -138,6 +138,13 @@ int main() {
                         if ((dataRecord[i].steps > 500) && (over500Period == 1)){
                             tempTargetBegin = i;
                         }
+                        else if ((dataRecord[i].steps < 500) && (over500Period == 0)){
+                            tempTargetEnd = i;
+                            if (tempTargetEnd-tempTargetBegin > targetEnd - targetBegin){
+                                targetBegin = tempTargetBegin;
+                                targetEnd = tempTargetEnd;
+                            }
+                        }
                         // write for end of period if step<500 and over500 == 0
                         // when period ends updata actual target
                         // for new iterations compare to original by calculating difference between start and end
