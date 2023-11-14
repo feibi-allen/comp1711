@@ -62,8 +62,7 @@ int main() {
         "Q: Exit\n"
         );
 
-        option = getchar();
-        while (getchar() != '\n');
+        scanf("%s", &option);
 
         switch (option){
             case 'A':
@@ -141,7 +140,7 @@ int main() {
                         }
                         else if ((dataRecord[i].steps < 500) && (over500Period == 0)){
                             tempTargetEnd = i;
-                            if (tempTargetEnd-tempTargetBegin > targetEnd - targetBegin){
+                            if ((tempTargetEnd-tempTargetBegin) > (targetEnd - targetBegin)){
                                 targetBegin = tempTargetBegin;
                                 targetEnd = tempTargetEnd;
                             }
@@ -150,7 +149,7 @@ int main() {
                         // when period ends updata actual target
                         // for new iterations compare to original by calculating difference between start and end
                     } 
-                    printf("Longest period start:\nLongest period end:\n ");
+                    printf("Longest period start:%s %s\nLongest period end:%s %s\n", dataRecord[targetBegin].date, dataRecord[targetBegin].time, dataRecord[targetEnd].date, dataRecord[targetEnd].time);
                     }
                     break;
 
