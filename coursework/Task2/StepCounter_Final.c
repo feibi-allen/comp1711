@@ -137,17 +137,16 @@ int main() {
                     for (int i = 0; i < lineNum; i++){
                         if ((dataRecord[i].steps > 500) && (over500Period == 1)){
                             tempTargetBegin = i;
+                            over500Period = 0;
                         }
                         else if ((dataRecord[i].steps < 500) && (over500Period == 0)){
-                            tempTargetEnd = i;
+                            tempTargetEnd = i-1;
+                            over500Period = 1;
                             if ((tempTargetEnd-tempTargetBegin) > (targetEnd - targetBegin)){
                                 targetBegin = tempTargetBegin;
                                 targetEnd = tempTargetEnd;
                             }
-                        }
-                        // write for end of period if step<500 and over500 == 0
-                        // when period ends updata actual target
-                        // for new iterations compare to original by calculating difference between start and end
+                        }                
                     } 
                     printf("Longest period start:%s %s\nLongest period end:%s %s\n", dataRecord[targetBegin].date, dataRecord[targetBegin].time, dataRecord[targetEnd].date, dataRecord[targetEnd].time);
                     }
