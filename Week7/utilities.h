@@ -74,7 +74,16 @@ FILE *open_file(char *filename, char *mode)
  */
 int read_file(FILE *inputFile, reading *dataArray)
 {
-    // to do
+    char line[buffer_size];
+    int counter = 0;
+    while (fgets(line, buffer_size, inputFile))
+        {
+            // split up the line and store it in the right place
+            // using the & operator to pass in a pointer to the bloodIron so it stores it
+            tokeniseRecord(line, ",", dataArray[counter].date, &dataArray[counter].bloodIron);
+            counter++;
+        }
+    return counter;
 }
 
 /**
@@ -86,7 +95,13 @@ int read_file(FILE *inputFile, reading *dataArray)
  */
 int data_checker(reading *dataArray, int numReadings)
 {
-    // to do
+    for (int i = 0; i < numReadings; i++){
+        if (dataArray[i].date == "" || dataArray[i].bloodIron == 0.0){
+            printf("0 level found.\n");
+            return 1;
+        }
+    }
+    return 0;
 }
 
 
@@ -111,7 +126,13 @@ float find_mean(reading* dataArray, int numReadings)
  */
 float find_highest(reading* dataArray, int numReadings)
 {
-    // to do
+   int targetReadingNum = 0;
+    for (int i = 0; i < numReadings; i++){
+        if (dataArray[i].bloodIron > dataArray[targetReadingNum].bloodIron){
+            targetReadingNum = i;
+        }
+    }
+    return dataArray[targetReadingNum].bloodIron;
 }
 
 /**
@@ -123,7 +144,13 @@ float find_highest(reading* dataArray, int numReadings)
  */
 float find_lowest(reading* dataArray, int numReadings)
 {
-    // to do
+    int targetReadingNum = 0;
+    for (int i = 0; i < numReadings; i++){
+        if (dataArray[i].bloodIron < dataArray[targetReadingNum].bloodIron){
+            targetReadingNum = i;
+        }
+    }
+    return dataArray[targetReadingNum].bloodIron;
 }
 
 
@@ -134,6 +161,25 @@ float find_lowest(reading* dataArray, int numReadings)
  * @param numReadings The number of readings in the array
  */
 void monthly_iron(reading* dataArray, int numReadings)
-{
-    // to do
+{ 
+    char targetMonth[10];
+
+    printf("Input target month as short form: ");
+    scanf("%s", targetMonth);
+
+    for (int i = 0; i < numReadings; i++){
+    
+        char *inputCopy = strdup(dataArray[i].date);
+        
+    // Tokenize the copied string
+        char *token = strtok(inputCopy, "-");
+        token = strtok(NULL, "-");
+        printf("%s",token);
+        if (token != NULL && token == targetMonth)
+        {
+            printf("%s %f\n",dataArray[i].date,dataArray[i].bloodIron);
+        }
+
+        free(inputCopy);
+    }
 }

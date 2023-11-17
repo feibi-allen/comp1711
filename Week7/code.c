@@ -18,18 +18,22 @@ int main()
     sscanf(line, " %s ", filename);
 
     char choice;
-    int counter = 0;
     float mean = 0;
 
-    while (1)
-    {
-        FILE *input = fopen(filename, "r");
+    FILE *input = fopen(filename, "r");
         if (!input)
         {
             printf("Error: File could not be opened\n");
             return 1;
         }
 
+    int counter = read_file(input,daily_readings);
+    if (data_checker(daily_readings, counter)){
+        return 1;
+    }
+
+    while (1)
+    {
         printf("A: View all your blood iron levels\n");                       // BRONZE
         printf("B: View your average blood iron level\n");                    // BRONZE
         printf("C: View your lowest blood iron level\n");                     // SILVER
@@ -53,14 +57,6 @@ int main()
         // this allows for either capital or lower case
         case 'A':
         case 'a':
-            counter = 0;
-            while (fgets(line, buffer_size, input))
-            {
-                // split up the line and store it in the right place
-                // using the & operator to pass in a pointer to the bloodIron so it stores it
-                tokeniseRecord(line, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
-                counter++;
-            }
             for (int i = 0; i < counter; i++)
             {
                 printf("%s - Blood iron: %.1f\n", daily_readings[i].date, daily_readings[i].bloodIron);
@@ -70,15 +66,6 @@ int main()
 
         case 'B':
         case 'b':
-            counter = 0;
-            while (fgets(line, buffer_size, input))
-            {
-                // split up the line and store it in the right place
-                // using the & operator to pass in a pointer to the bloodIron so it stores it
-                tokeniseRecord(line, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
-                mean += daily_readings[counter].bloodIron;
-                counter++;
-            }
             mean /= counter;
             printf("Your average blood iron was %.2f\n", mean);
             fclose(input);
@@ -86,17 +73,17 @@ int main()
 
         case 'C':
         case 'c':
-            return 0;
+            printf("%f\n",find_lowest(daily_readings,counter));
             break;
 
         case 'D':
         case 'd':
-            return 0;
+            printf("%f\n", find_highest(daily_readings,counter));
             break;
 
         case 'E':
         case 'e':
-            return 0;
+            monthly_iron(daily_readings,counter);
             break;
 
         case 'F':
