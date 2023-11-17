@@ -162,7 +162,7 @@ float find_lowest(reading* dataArray, int numReadings)
  */
 void monthly_iron(reading* dataArray, int numReadings)
 { 
-    char targetMonth[10];
+    char targetMonth[3];
 
     printf("Input target month as short form: ");
     scanf("%s", targetMonth);
@@ -171,12 +171,9 @@ void monthly_iron(reading* dataArray, int numReadings)
     
         char *inputCopy = strdup(dataArray[i].date);
         
-    // Tokenize the copied string
         char *token = strtok(inputCopy, "-");
         token = strtok(NULL, "-");
-        printf("%s",token);
-        if (token != NULL && token == targetMonth)
-        {
+        if (!strcmp(token,targetMonth)){
             printf("%s %f\n",dataArray[i].date,dataArray[i].bloodIron);
         }
 
