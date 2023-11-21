@@ -112,7 +112,6 @@ int main() {
                         if (dataRecord[i].steps > largestNumSteps){
                             targetLine = i;
                             largestNumSteps = dataRecord[targetLine].steps;
-                            printf("%d\n",largestNumSteps);
                         }
                     }
                     printf("Largest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
