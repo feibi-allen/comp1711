@@ -42,15 +42,12 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-    char option, fileName[30];
-    int lineNum = 0;
-    char date[11], time[6], steps[10];
-    FITNESS_DATA dataRecord[100];
+   FITNESS_DATA dataRecord[200];
+   char fileName[30], date[11], time[6], steps[10];
+   int lineNum = 0;
 
-    int runMenue = 0;
-
-    while (runMenue == 0){
-    
+   while (1)
+    {
         printf(
         "Menue Options:\n"
         "A: Specify the filename to be imported \n"
@@ -62,96 +59,38 @@ int main() {
         "Q: Exit\n"
         );
 
-        scanf("%s", &option);
+
+        char option = getchar();
+
+        while (getchar() != '\n');
 
         switch (option){
-            case 'A':
-                    printf("Input filename:\n");
-                    scanf("%s", fileName);
-
-                    FILE *dataFile = fopen(fileName, "r");
-
-                    if (dataFile == NULL) {
-                        perror("Error: Could not find or open file");
-                        return 1;
-                    }
-
-                    else{
-                        lineNum = 0;
-                        int lineLength = 30;
-                        char line[lineLength];
-                        while (fgets(line , lineLength, dataFile)){
-                        tokeniseRecord(line, ",", date, time, steps);
-                        strcpy(dataRecord[lineNum].date, date);
-                        strcpy(dataRecord[lineNum].time, time);
-                        dataRecord[lineNum].steps = atoi(steps);
-                        lineNum++;
-                        }
-                        printf("File successfully loaded.\n");
-                    }
+            case 'A':  // choose file to open and put into struct
+                    printf("Aselected\n");
                     break;
 
-            case 'B': printf("Total records:%d\n", lineNum);
+            case 'B': 
+
                     break;
         
             case 'C': 
-                    {int targetLine, fewestNumSteps = 100000;
-                    for (int i = 0; i < lineNum; i++){
-                        if (dataRecord[i].steps < fewestNumSteps){
-                            targetLine = i;
-                            fewestNumSteps = dataRecord[targetLine].steps;
-                        }
-                    }
-                    printf("Fewest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
-                    }
+                    
                     break;
         
             case 'D':
-                    {int targetLine, largestNumSteps = 0;
-                    for (int i = 0; i < lineNum; i++){
-                        if (dataRecord[i].steps > largestNumSteps){
-                            targetLine = i;
-                            largestNumSteps = dataRecord[targetLine].steps;
-                        }
-                    }
-                    printf("Largest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
-                    }
+                    
                     break;
 
             case 'E':
-                    {int stepSum = 0;
-                    for (int i = 0; i < lineNum; i++){
-                        stepSum += dataRecord[i].steps;
-                    }
-                    int averageSteps = stepSum/lineNum;
-                    if (stepSum%lineNum > lineNum/2){
-                        averageSteps ++;
-                    }
-                    printf("Mean step count: %d\n" , averageSteps);
-                    }
+                    
                     break;
         
             case 'F':
-                    {int tempTargetBegin, tempTargetEnd, targetBegin, targetEnd, over500Period = 1;
-                    for (int i = 0; i < lineNum; i++){
-                        if ((dataRecord[i].steps > 500) && (over500Period == 1)){
-                            tempTargetBegin = i;
-                            over500Period = 0;
-                        }
-                        else if ((dataRecord[i].steps < 500) && (over500Period == 0)){
-                            tempTargetEnd = i-1;
-                            over500Period = 1;
-                            if ((tempTargetEnd-tempTargetBegin) > (targetEnd - targetBegin)){
-                                targetBegin = tempTargetBegin;
-                                targetEnd = tempTargetEnd;
-                            }
-                        }                
-                    } 
-                    printf("Longest period start:%s %s\nLongest period end:%s %s\n", dataRecord[targetBegin].date, dataRecord[targetBegin].time, dataRecord[targetEnd].date, dataRecord[targetEnd].time);
-                    }
+                    
                     break;
 
-            case 'Q': runMenue = 1;
+            case 'Q':
+                    return 0;
                     break;
 
             default: printf("Invalid choice. Try again.\n"); 
