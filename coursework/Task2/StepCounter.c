@@ -89,13 +89,12 @@ int main() {
                         }
                         fclose(dataFile);
                         printf("File successfully loaded.\n");
+                        printf("%d", lineNum);
                     }
-
-
                     break;
 
             case 'B': 
-
+                    printf("%d\n", lineNum);
                     break;
         
             case 'C': 
