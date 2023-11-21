@@ -43,7 +43,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main() {
    FITNESS_DATA dataRecord[200];
-   char fileName[30], date[11], time[6], steps[10];
+   char fileName[30], steps[10], option;
    int lineNum = 0;
 
    while (1)
@@ -58,15 +58,40 @@ int main() {
         "F: Find the longest continuous period where the step count is above 500 steps\n"
         "Q: Exit\n"
         );
-
-
-        char option = getchar();
-
-        while (getchar() != '\n');
+ 
+        scanf("%s", &option);
 
         switch (option){
             case 'A':  // choose file to open and put into struct
-                    printf("Aselected\n");
+                    printf("Input filename:\n");
+                    scanf("%s", fileName);
+
+                    FILE *dataFile = fopen(fileName, "r");
+
+                    if (!dataFile) {
+                        printf("Error: Could not find or open file\n");
+                        return 1;
+                    }
+
+                    else if (dataFile == NULL) {
+                        perror("Error: Could not find or open file\n");
+                        return 1;
+                    }
+                    else {
+                        lineNum = 0;
+                        int lineLength = 30;
+                        char line[lineLength];
+
+                        while (fgets(line, lineLength, dataFile)){
+                            tokeniseRecord(line, ",", dataRecord[lineNum].date, dataRecord[lineNum].time, steps);
+                            dataRecord[lineNum].steps = atoi(steps);
+                            lineNum++;
+                        }
+                        fclose(dataFile);
+                        printf("File successfully loaded.\n");
+                    }
+
+
                     break;
 
             case 'B': 
