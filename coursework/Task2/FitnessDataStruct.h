@@ -13,6 +13,17 @@ typedef struct {
 // Helper function prototypes
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
 
+// My functions
+int FindFewestLine(FITNESS_DATA *dataRecord, int lineNum){
+	int targetLine = 0, fewestSteps = dataRecord[0].steps;
+	for (int i=1; i < lineNum; i++){
+		if (dataRecord[i].steps <= fewestSteps){
+			targetLine = i;
+			fewestSteps = dataRecord[i].steps;
+		}
+	}
+	return targetLine;
+}
 
 
 #endif // FITNESS_DATA_STRUCT_H

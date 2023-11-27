@@ -58,13 +58,13 @@ int main() {
         "E: Find the mean step count of all the records in the file\n"
         "F: Find the longest continuous period where the step count is above 500 steps\n"
         "Q: Exit\n"
-        );
+        "Enter choice: ");
 
         scanf("%s", &option);
 
         switch (option){
             case 'A':
-                    printf("Input filename:\n");
+                    printf("Input filename: ");
                     char fileName[30], steps[10];
                     scanf("%s", fileName);
 
@@ -91,10 +91,11 @@ int main() {
                     break;
 
             case 'B': 
-                    printf("Total records:%d\n", lineNum);
+                    printf("Total records: %d\n", lineNum);
                     break;
         
-            case 'C': 
+            case 'C':
+                    printf("Fewest steps: %s %s\n", dataRecord[FindFewestLine(dataRecord,lineNum)].date,dataRecord[FindFewestLine(dataRecord,lineNum)].time);
                     break;
         
             case 'D':

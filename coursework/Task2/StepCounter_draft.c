@@ -72,7 +72,6 @@ int main() {
                         printf("Error: Could not find or open file\n");
                         return 1;
                     }
-                    
                     else {
                         lineNum = 0;
                         int lineLength = 30;
