@@ -36,5 +36,14 @@ int FindLargestLine(FITNESS_DATA *dataRecord, int lineNum){
 	return targetLine;
 }
 
+int calcMean(FITNESS_DATA *dataRecord, int lineNum){
+	int sum = 0;
+	for (int i = 0; i < lineNum; i++){
+		sum += dataRecord[i].steps;
+	}
+	int mean = (((sum*10)/lineNum)+5)/10;
+	return mean;
+}
+
 
 #endif // FITNESS_DATA_STRUCT_H

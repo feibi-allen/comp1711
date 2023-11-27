@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include "FitnessDataStruct.h"
 
 // Struct moved to header file
@@ -103,6 +102,7 @@ int main() {
                     break;
 
             case 'E':
+                    printf("Mean step count: %d\n", calcMean(dataRecord, lineNum));
                     break;
         
             case 'F':
