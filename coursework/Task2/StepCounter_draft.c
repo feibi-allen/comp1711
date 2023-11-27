@@ -42,14 +42,11 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-    char option, fileName[30];
-    int lineNum = 0;
-    char date[11], time[6], steps[10];
-    FITNESS_DATA dataRecord[100];
+    FITNESS_DATA dataRecord[200];
+    char fileName[30], steps[10], option;
+    int lineNum;
 
-    int runMenue = 0;
-
-    while (runMenue == 0){
+    while (1){
     
         printf(
         "Menue Options:\n"
@@ -71,22 +68,26 @@ int main() {
 
                     FILE *dataFile = fopen(fileName, "r");
 
-                    if (dataFile == NULL) {
-                        perror("Error: Could not find or open file");
+                    if (!dataFile) {
+                        printf("Error: Could not find or open file\n");
                         return 1;
                     }
 
-                    else{
+                    else if (dataFile == NULL) {
+                        perror("Error: Could not find or open file\n");
+                        return 1;
+                    }
+                    else {
                         lineNum = 0;
                         int lineLength = 30;
                         char line[lineLength];
-                        while (fgets(line , lineLength, dataFile)){
-                        tokeniseRecord(line, ",", date, time, steps);
-                        strcpy(dataRecord[lineNum].date, date);
-                        strcpy(dataRecord[lineNum].time, time);
-                        dataRecord[lineNum].steps = atoi(steps);
-                        lineNum++;
+
+                        while (fgets(line, lineLength, dataFile)){
+                            tokeniseRecord(line, ",", dataRecord[lineNum].date, dataRecord[lineNum].time, steps);
+                            dataRecord[lineNum].steps = atoi(steps);
+                            lineNum++;
                         }
+                        fclose(dataFile);
                         printf("File successfully loaded.\n");
                     }
                     break;
@@ -95,7 +96,7 @@ int main() {
                     break;
         
             case 'C': 
-                    {int targetLine, fewestNumSteps = 100000;
+                    {int targetLine, fewestNumSteps = 10000;
                     for (int i = 0; i < lineNum; i++){
                         if (dataRecord[i].steps < fewestNumSteps){
                             targetLine = i;
@@ -151,7 +152,8 @@ int main() {
                     }
                     break;
 
-            case 'Q': runMenue = 1;
+            case 'Q':
+                    return 1;
                     break;
 
             default: printf("Invalid choice. Try again.\n"); 

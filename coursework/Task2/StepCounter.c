@@ -42,12 +42,12 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-   FITNESS_DATA dataRecord[200];
-   char fileName[30], steps[10], option;
-   int lineNum = 0;
+    FITNESS_DATA dataRecord[200];
+    char fileName[30], steps[10], option;
+    int lineNum;
 
-   while (1)
-    {
+    while (1){
+    
         printf(
         "Menue Options:\n"
         "A: Specify the filename to be imported \n"
@@ -58,11 +58,11 @@ int main() {
         "F: Find the longest continuous period where the step count is above 500 steps\n"
         "Q: Exit\n"
         );
- 
+
         scanf("%s", &option);
 
         switch (option){
-            case 'A':  // choose file to open and put into struct
+            case 'A':
                     printf("Input filename:\n");
                     scanf("%s", fileName);
 
@@ -89,32 +89,71 @@ int main() {
                         }
                         fclose(dataFile);
                         printf("File successfully loaded.\n");
-                        printf("%d", lineNum);
                     }
                     break;
 
-            case 'B': 
-                    printf("%d\n", lineNum);
+            case 'B': printf("Total records:%d\n", lineNum);
                     break;
         
             case 'C': 
-                    
+                    {int targetLine, fewestNumSteps = 10000;
+                    for (int i = 0; i < lineNum; i++){
+                        if (dataRecord[i].steps < fewestNumSteps){
+                            targetLine = i;
+                            fewestNumSteps = dataRecord[targetLine].steps;
+                        }
+                    }
+                    printf("Fewest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
+                    }
                     break;
         
             case 'D':
-                    
+                    {int targetLine, largestNumSteps = 0;
+                    for (int i = 0; i < lineNum; i++){
+                        if (dataRecord[i].steps > largestNumSteps){
+                            targetLine = i;
+                            largestNumSteps = dataRecord[targetLine].steps;
+                        }
+                    }
+                    printf("Largest steps: %s %s\n", dataRecord[targetLine].date, dataRecord[targetLine].time);
+                    }
                     break;
 
             case 'E':
-                    
+                    {int stepSum = 0;
+                    for (int i = 0; i < lineNum; i++){
+                        stepSum += dataRecord[i].steps;
+                    }
+                    int averageSteps = stepSum/lineNum;
+                    if (stepSum%lineNum > lineNum/2){
+                        averageSteps ++;
+                    }
+                    printf("Mean step count: %d\n" , averageSteps);
+                    }
                     break;
         
             case 'F':
-                    
+                    {int tempTargetBegin, tempTargetEnd, targetBegin, targetEnd, over500Period = 1;
+                    for (int i = 0; i < lineNum; i++){
+                        if ((dataRecord[i].steps > 500) && (over500Period == 1)){
+                            tempTargetBegin = i;
+                            over500Period = 0;
+                        }
+                        else if ((dataRecord[i].steps < 500) && (over500Period == 0)){
+                            tempTargetEnd = i-1;
+                            over500Period = 1;
+                            if ((tempTargetEnd-tempTargetBegin) > (targetEnd - targetBegin)){
+                                targetBegin = tempTargetBegin;
+                                targetEnd = tempTargetEnd;
+                            }
+                        }                
+                    } 
+                    printf("Longest period start:%s %s\nLongest period end:%s %s\n", dataRecord[targetBegin].date, dataRecord[targetBegin].time, dataRecord[targetEnd].date, dataRecord[targetEnd].time);
+                    }
                     break;
 
             case 'Q':
-                    return 0;
+                    return 1;
                     break;
 
             default: printf("Invalid choice. Try again.\n"); 
