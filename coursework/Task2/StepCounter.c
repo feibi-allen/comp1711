@@ -106,6 +106,7 @@ int main() {
                     break;
         
             case 'F':
+                    findLongestFivehundred(dataRecord, lineNum);
                     break;
 
             case 'Q':

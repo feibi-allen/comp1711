@@ -24,4 +24,6 @@ int main(){
     
     printArray(2,3,arrayA);
     printArray(3,2,arrayB);
+
+    
 }
