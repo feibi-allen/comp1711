@@ -25,5 +25,16 @@ int FindFewestLine(FITNESS_DATA *dataRecord, int lineNum){
 	return targetLine;
 }
 
+int FindLargestLine(FITNESS_DATA *dataRecord, int lineNum){
+	int targetLine = 0, mostSteps = dataRecord[0].steps;
+	for (int i = 1; i < lineNum; i++){
+		if (dataRecord[i].steps >= mostSteps){
+			targetLine = i;
+			mostSteps = dataRecord[i].steps;
+		}
+	}
+	return targetLine;
+}
+
 
 #endif // FITNESS_DATA_STRUCT_H

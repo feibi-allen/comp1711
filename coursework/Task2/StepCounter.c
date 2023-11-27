@@ -99,6 +99,7 @@ int main() {
                     break;
         
             case 'D':
+                    printf("Largest steps: %s %s\n", dataRecord[FindLargestLine(dataRecord,lineNum)].date,dataRecord[FindLargestLine(dataRecord,lineNum)].time);
                     break;
 
             case 'E':
