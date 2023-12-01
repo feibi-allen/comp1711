@@ -68,6 +68,13 @@ int main() {
         }
         fclose(dataFile);
 
+        for (int i = 0; i < lineNum; i ++){
+            if (dataRecord[i].steps == 0){
+                printf("Error: invalid file\n");
+                return 1;
+            }
+        }
+
         sort(dataRecord,lineNum);
 ;
         FILE *sortedDataFile = fopen("mydata.csv.tsv", "w");

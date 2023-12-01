@@ -106,7 +106,8 @@ int main() {
                     break;
         
             case 'F':
-                    {int fivehundredFound = 0, startLine, endLine, tempStartLine, tempEndLine;
+                    {
+                    int fivehundredFound = 0, startLine, endLine, tempStartLine, tempEndLine;
 	                for (int i = 0; i < lineNum; i++){
 		                if (dataRecord[i].steps > 500 && fivehundredFound == 0){
 			                tempStartLine = i;
@@ -122,11 +123,12 @@ int main() {
 		                }
 	                }
 	                printf("Longest period start: %s %s\n", dataRecord[startLine].date, dataRecord[startLine].time);
-	                printf("Longest period end: %s %s\n", dataRecord[endLine].date, dataRecord[endLine].time);}
+	                printf("Longest period end: %s %s\n", dataRecord[endLine].date, dataRecord[endLine].time);
+                    }
                     break;
 
             case 'Q':
-                    return 1;
+                    return 0; // try without return to quit maybe it thinks this is error.
                     break;
 
             default: printf("Invalid choice. Try again.\n"); 
