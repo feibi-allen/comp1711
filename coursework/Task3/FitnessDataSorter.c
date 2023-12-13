@@ -25,6 +25,18 @@ void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *s
     }
 }
 
+int check(FitnessData *dataRecord, int lineNum){
+    for (int i = 0; i < lineNum; i ++){
+            if (dataRecord[i].steps == 0){
+                return 1;
+            }else if (strlen(dataRecord[i].date) != 10){
+                return 1;
+            }else if (strlen(dataRecord[i].time) != 5){
+                return 1;
+            }
+    }
+    return 0;
+}
 
 int sort(FitnessData *dataRecord, int lineNum){
     while (1){
@@ -68,12 +80,10 @@ int main() {
         }
         fclose(dataFile);
 
-        for (int i = 0; i < lineNum; i ++){
-            if (dataRecord[i].steps == 0){
-                printf("Error: invalid file\n");
-                return 1;
+        if (check(dataRecord, lineNum) == 1){
+            printf("Error: invalid file\n");
+            return 1;
             }
-        }
 
         sort(dataRecord,lineNum);
 ;
