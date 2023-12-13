@@ -77,7 +77,7 @@ int main() {
 
         sort(dataRecord,lineNum);
 ;
-        FILE *sortedDataFile = fopen("data.csv.tsv", "w");
+        FILE *sortedDataFile = fopen(strcat(fileName,".tsv"), "w");
         for (int i = 0; i < lineNum; i++){
             fprintf(sortedDataFile, "%s\t%s\t%d\n", dataRecord[i].date,dataRecord[i].time,dataRecord[i].steps);
         }
